@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <title>Adafluit 32x16 RGB LED Matrix は Arduino Leonardoじゃ動かない | LOG</title>
+  <title>Adafluit 32x16 RGB LED Matrix 用のライブラリは Arduino Leonardoじゃ動かない | log</title>
   <meta name="description" content="" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="MobileOptimized" content="320" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="気づかなかった。 Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。 まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。  The library works ONLY with the Arduino Uno and Mega. Other boards (such as the Arduin">
+  <meta name="description" content="気づかなかった。 Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。 まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。  We have example code ready to go for these displays. It’s compatible with the Arduino">
 <meta name="keywords" content="Arduino,Adafluit,LED">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Adafluit 32x16 RGB LED Matrix は Arduino Leonardoじゃ動かない">
+<meta property="og:title" content="Adafluit 32x16 RGB LED Matrix 用のライブラリは Arduino Leonardoじゃ動かない">
 <meta property="og:url" content="https://tohfu.github.io/2017/12/11/2/index.html">
-<meta property="og:site_name" content="LOG">
-<meta property="og:description" content="気づかなかった。 Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。 まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。  The library works ONLY with the Arduino Uno and Mega. Other boards (such as the Arduin">
+<meta property="og:site_name" content="log">
+<meta property="og:description" content="気づかなかった。 Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。 まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。  We have example code ready to go for these displays. It’s compatible with the Arduino">
 <meta property="og:locale" content="ja">
 <meta property="og:image" content="https://tohfu.github.io/assets/img/attention.png">
-<meta property="og:updated_time" content="2017-12-11T13:36:49.000Z">
+<meta property="og:updated_time" content="2017-12-11T15:55:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Adafluit 32x16 RGB LED Matrix は Arduino Leonardoじゃ動かない">
-<meta name="twitter:description" content="気づかなかった。 Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。 まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。  The library works ONLY with the Arduino Uno and Mega. Other boards (such as the Arduin">
+<meta name="twitter:title" content="Adafluit 32x16 RGB LED Matrix 用のライブラリは Arduino Leonardoじゃ動かない">
+<meta name="twitter:description" content="気づかなかった。 Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。 まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。  We have example code ready to go for these displays. It’s compatible with the Arduino">
 <meta name="twitter:image" content="https://tohfu.github.io/assets/img/attention.png">
   <!-- build:css css/screen.css -->
 
@@ -30,7 +30,7 @@
   <!-- endbuild -->
   
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-  <meta name="generator" content="LOG">
+  <meta name="generator" content="log">
   
   
   
@@ -41,9 +41,9 @@
 
   <header class="main-header post-head no-cover" >
     <nav class="main-nav  clearfix">
-        
+        <!--  -->
         <a class="back-button icon-arrow-left" href="/">Home</a>
-        <a class="subscribe-button icon-feed" href="/atom.xml">Subscribe</a>
+        
     </nav>
     
     <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
@@ -54,7 +54,7 @@
 <main id="content" class="content" role="main">
   <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
-      <h1 class="post-title" itemprop="name">Adafluit 32x16 RGB LED Matrix は Arduino Leonardoじゃ動かない</h1>
+      <h1 class="post-title" itemprop="name">Adafluit 32x16 RGB LED Matrix 用のライブラリは Arduino Leonardoじゃ動かない</h1>
       <section class="post-meta">
   <time datetime="2017-12-11T13:11:36.000Z" itemprop="datePublished" class="post-date">
       2017-12-11
@@ -76,35 +76,36 @@
       
 
       
+      <section class="post-updated">
+  Last updated on <time datetime="2017-12-11T15:55:27.000Z" itemprop="dateModified">
+      2017-12-12
+  </time>
+</section>
+
+      
       <p>気づかなかった。</p>
 <p>Adafluit 32x16 RGB LED Matrix を使ったプロダクトを作ってみています。</p>
 <p>まず点灯実験と思って、document読み進めながら配線して、いざ、exampleの書き込み、と思ったら。</p>
 <blockquote>
-<p>The library works ONLY with the Arduino Uno and Mega. Other boards (such as the Arduino<br>Leonardo) ARE NOT SUPPORTED.</p>
+<p>We have example code ready to go for these displays. It’s compatible with the Arduino Uno or Mega…<br>but not other boards like the Leonardo, nor “Arduino-like” boards such as Netduino…programming gurus might be able to port it to other microcontrollers by adapting the C++ source, but as written it does some pretty low-level, non-portable things.</p>
 </blockquote>
 <p>あー、<br>接続したArduino、Leonardoだったわ。</p>
 <p>公式サイトの方にもでっかく書いてました。確認不足。</p>
 <p><img src="/assets/img/attention.png" alt="attention" title="attention"></p>
 <p><a href="https://learn.adafruit.com/32x16-32x32-rgb-led-matrix" target="_blank" rel="noopener">Overview | 32x16 and 32x32 RGB LED Matrix | Adafruit Learning System</a></p>
-<h5 id="追記"><a href="#追記" class="headerlink" title="追記"></a>追記</h5><p>ちなみに試してみたところ、一応点灯はするけど発光パターンがおかしくなりました。。</p>
+<h5 id="追記"><a href="#追記" class="headerlink" title="追記"></a>追記</h5><p>ちなみに試してみたところ、一応点灯はするけど発光パターンが正常ではない様子。ライブラリの修正は諦めました。</p>
 
     </section>
     <footer class="post-footer">
       <section class="author">
-    <h4>Hayato AKAGIRI</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.</p>
-    
-    <div class="author-meta">
-      <span class="author-location icon-location">Location</span>
-      <span class="author-link icon-link"><a href="Website">Website</a></span>
+    <h4>tohfu</h4>
+    <p>web engineer / vj / media art</p>
     
       <section>
         
-          <a href="https://twitter.com/**profile**" class="author-social">twitter</a>
+          <a href="https://twitter.com/mitamamma" class="author-social">twitter</a>
         
-          <a href="https://plus.google.com/**profile**" class="author-social">google+</a>
-        
-          <a href="https://github.com/**profile**" class="author-social">github</a>
+          <a href="https://github.com/TOHFU" class="author-social">github</a>
         
       </section>
     </div>
@@ -144,12 +145,20 @@
 
 
   <footer class="site-footer clearfix">
- <section class="copyright"><a href="/">LOG</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="copyright"><a href="/">log</a> &copy; 2015 &bull; All rights reserved.</section>
  <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
 </footer>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript">
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
 
 <script type="text/javascript" src="/js/index.js"></script>
 
