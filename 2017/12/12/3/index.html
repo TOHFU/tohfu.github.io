@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Adafluit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる | log</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafluit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
+<meta name="keywords" content="Adafluit,LED,Raspberry Pi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Adafluit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
+<meta property="og:url" content="https://tohfu.github.io/2017/12/12/3/index.html">
+<meta property="og:site_name" content="log">
+<meta property="og:description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafluit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https://tohfu.github.io/assets/img/ledmatrix_demo.jpg">
+<meta property="og:updated_time" content="2017-12-12T13:38:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Adafluit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
+<meta name="twitter:description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafluit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
+<meta name="twitter:image" content="https://tohfu.github.io/assets/img/ledmatrix_demo.jpg">
+  <!-- build:css css/screen.css -->
+
+  <link rel="stylesheet" href="/css/screen.css">
+  
+  <!-- endbuild -->
+  
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <meta name="generator" content="log">
+  
+  
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="main-header post-head no-cover" >
+    <nav class="main-nav  clearfix">
+        <!--  -->
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        
+    </nav>
+    
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  
+
+<main id="content" class="content" role="main">
+  <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name">Adafluit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる</h1>
+      <section class="post-meta">
+  <time datetime="2017-12-12T13:27:41.000Z" itemprop="datePublished" class="post-date">
+      2017-12-12
+  </time>
+  
+  
+  on 
+  <a href='/tags/Adafluit/'>Adafluit</a>,
+  
+  <a href='/tags/LED/'>LED</a>,
+  
+  <a href='/tags/Raspberry-Pi/'>Raspberry Pi</a>
+  
+  
+</section>
+
+    </header>
+    <section class="post-content" itemprop="description articleBody">
+      
+
+      
+      <p>引き続き、LED Matrixの制御についてです。</p>
+<p>最初は、<a href="https://learn.adafruit.com/connecting-a-16x32-rgb-led-matrix-panel-to-a-raspberry-pi/overview" target="_blank" rel="noopener">Adafluit公式のtutorial</a>を参考にしようと思ったのですが、<br>tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。</p>
+<h3 id="1-Raspberry-PiとLED-Matrixの接続"><a href="#1-Raspberry-PiとLED-Matrixの接続" class="headerlink" title="1.Raspberry PiとLED Matrixの接続"></a>1.Raspberry PiとLED Matrixの接続</h3><p>接続図を参考に。<br><a href="https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/wiring.md" target="_blank" rel="noopener">rpi-rgb-led-matrix/wiring.md at master · hzeller/rpi-rgb-led-matrix</a></p>
+<p>結構うってなる説明文ですが、32x16の1台だけだったら😄の部分だけを接続すればOKです。</p>
+<p>あと、電源はRaspberry Piとは別に5V2A程度のACアダプタに接続します。</p>
+<h3 id="2-Raspberry-Piにライブラリをインストール"><a href="#2-Raspberry-Piにライブラリをインストール" class="headerlink" title="2.Raspberry Piにライブラリをインストール"></a>2.Raspberry Piにライブラリをインストール</h3><p>適当にディレクトリを作る</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir display16x32</span><br><span class="line">$ cd display16x32</span><br></pre></td></tr></table></figure>
+<p>ライブラリのリポジトリをclone &amp; compile<br>(LED Matrixのバージョンによっては、makefileの設定は必要みたい。とりあえず、大丈夫でした。：<a href="https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/README.md" target="_blank" rel="noopener">readme.md</a>参照)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/hzeller/rpi-rgb-led-matrix/</span><br><span class="line">$ cd rpi-rgb-led-matrix</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+<h3 id="3-サンプルを動かしてみる"><a href="#3-サンプルを動かしてみる" class="headerlink" title="3.サンプルを動かしてみる"></a>3.サンプルを動かしてみる</h3><p>サンプルプログラムのcompile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd examples-api-use</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+<p>サンプルプログラムのoptionを確認</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./demo</span><br><span class="line">Expected required option -D &lt;demo&gt;</span><br><span class="line">usage: ./demo &lt;options&gt; -D &lt;demo-nr&gt; [optional parameter]</span><br><span class="line">Options:</span><br><span class="line">-D &lt;demo-nr&gt;              : Always needs to be set</span><br><span class="line">-L                        : Large display, in which each chain is &apos;folded down&apos;</span><br><span class="line">                           in the middle in an U-arrangement to get more vertical space.</span><br><span class="line">-R &lt;rotation&gt;             : Sets the rotation of matrix. Allowed: 0, 90, 180, 270. Default: 0.</span><br><span class="line">-t &lt;seconds&gt;              : Run for these number of seconds, then exit.</span><br><span class="line">--led-gpio-mapping=&lt;name&gt; : Name of GPIO mapping used. Default &quot;regular&quot;</span><br><span class="line">--led-rows=&lt;rows&gt;         : Panel rows. 8, 16, 32 or 64. (Default: 32).</span><br><span class="line">--led-chain=&lt;chained&gt;     : Number of daisy-chained panels. (Default: 1).</span><br><span class="line">--led-parallel=&lt;parallel&gt; : For A/B+ models or RPi2,3b: parallel chains. range=1..3 (Default: 1).</span><br><span class="line">--led-pwm-bits=&lt;1..11&gt;    : PWM bits (Default: 11).</span><br><span class="line">--led-brightness=&lt;percent&gt;: Brightness in percent (Default: 100).</span><br><span class="line">--led-scan-mode=&lt;0..1&gt;    : 0 = progressive; 1 = interlaced (Default: 0).</span><br><span class="line">--led-show-refresh        : Show refresh rate.</span><br><span class="line">--led-inverse             : Switch if your matrix has inverse colors on.</span><br><span class="line">--led-rgb-sequence        : Switch if your matrix has led colors swapped (Default: &quot;RGB&quot;)</span><br><span class="line">--led-pwm-lsb-nanoseconds : PWM Nanoseconds for LSB (Default: 130)</span><br><span class="line">--led-no-hardware-pulse   : Don&apos;t use hardware pin-pulse generation.</span><br><span class="line">--led-slowdown-gpio=&lt;0..2&gt;: Slowdown GPIO. Needed for faster Pis and/or slower panels (Default: 1).</span><br><span class="line">--led-daemon              : Make the process run in the background as daemon.</span><br><span class="line">--led-no-drop-privs       : Don&apos;t drop privileges from &apos;root&apos; after initializing the hardware.</span><br><span class="line">Demos, choosen with -D</span><br><span class="line">0  - some rotating square</span><br><span class="line">1  - forward scrolling an image (-m &lt;scroll-ms&gt;)</span><br><span class="line">2  - backward scrolling an image (-m &lt;scroll-ms&gt;)</span><br><span class="line">3  - test image: a square</span><br><span class="line">4  - Pulsing color</span><br><span class="line">5  - Grayscale Block</span><br><span class="line">6  - Abelian sandpile model (-m &lt;time-step-ms&gt;)</span><br><span class="line">7  - Conway&apos;s game of life (-m &lt;time-step-ms&gt;)</span><br><span class="line">8  - Langton&apos;s ant (-m &lt;time-step-ms&gt;)</span><br><span class="line">9  - Volume bars (-m &lt;time-step-ms&gt;)</span><br><span class="line">10 - Evolution of color (-m &lt;time-step-ms&gt;)</span><br><span class="line">11 - Brightness pulse generator</span><br><span class="line">Example:</span><br><span class="line">./demo -t 10 -D 1 runtext.ppm</span><br><span class="line">Scrolls the runtext for 10 seconds</span><br></pre></td></tr></table></figure>
+<p>32x16だと、<code>--led-rows=16</code>の指定が必要とのこと。<br>まずは0番(some rotating square)のサンプルプログラムを実行してみる。</p>
+<p><code>--led-no-hardware-pulse</code>を入れたのはオーディオ系のerrorが出たからで、多分プレーンなraspberry piなら大丈夫だと思います。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./demo -D 0 --led-no-hardware-pulse --led-rows=16</span><br></pre></td></tr></table></figure>
+<p>動いたー。</p>
+<p><img src="/assets/img/ledmatrix_demo.jpg" alt="attention" title="led matrix demo"></p>
+<h5 id="使用した機材"><a href="#使用した機材" class="headerlink" title="使用した機材"></a>使用した機材</h5><ul>
+<li>Raspberry Pi 2 Model B</li>
+<li>Adafluit 32x16 RGB LED Matrix</li>
+<li>5V2A ACアダプタ</li>
+<li>ジャンパワイヤ(オス〜メス) いっぱい</li>
+</ul>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>tohfu</h4>
+    <p>web engineer / vj / media art</p>
+    
+      <section>
+        
+          <a href="https://twitter.com/mitamamma" class="author-social">twitter</a>
+        
+          <a href="https://github.com/TOHFU" class="author-social">github</a>
+        
+      </section>
+    </div>
+</section>
+
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=https://tohfu.github.io/2017/12/12/3/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://tohfu.github.io/2017/12/12/3/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://tohfu.github.io/2017/12/12/3/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+  
+  <span class="page-number">•</span>
+  
+  <a class="older-posts" href="/2017/12/11/2/" title="Adafluit 32x16 RGB LED Matrix 用のライブラリは Arduino Leonardoじゃ動かない">
+      Older Post →
+  </a>
+  
+</nav>
+
+  
+</div>
+
+</main>
+
+
+  <footer class="site-footer clearfix">
+ <section class="copyright"><a href="/">log</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript">
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+</body>
+</html>
