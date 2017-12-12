@@ -832,7 +832,7 @@ margin on the iframe, cause it breaks stuff. */
     height: 100%;
     margin-bottom: 5rem;
     text-align: center;
-    background: #222 no-repeat center center;
+    background: #eee no-repeat center center;
     background-size: cover;
     overflow: hidden;
 }
@@ -2000,7 +2000,7 @@ pre .chunk {
 
     .main-header {
         margin-bottom: 15px;
-        height: 40%;
+        height: 100%;
     }
 
     .no-cover.main-header {
