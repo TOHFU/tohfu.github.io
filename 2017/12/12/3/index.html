@@ -10,7 +10,7 @@
   <meta name="MobileOptimized" content="320" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafruit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
-<meta name="keywords" content="Adafruit,LED,Raspberry Pi">
+<meta name="keywords" content="Raspberry Pi,Adafruit,LED">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adafruit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
 <meta property="og:url" content="https://tohfu.github.io/2017/12/12/3/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafruit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
 <meta property="og:locale" content="ja">
 <meta property="og:image" content="https://tohfu.github.io/assets/img/ledmatrix_demo.jpg">
-<meta property="og:updated_time" content="2017-12-13T05:07:21.000Z">
+<meta property="og:updated_time" content="2017-12-13T13:57:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adafruit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
 <meta name="twitter:description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafruit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
@@ -62,11 +62,11 @@
   
   
   on 
+  <a href='/tags/Raspberry-Pi/'>Raspberry Pi</a>,
+  
   <a href='/tags/Adafruit/'>Adafruit</a>,
   
-  <a href='/tags/LED/'>LED</a>,
-  
-  <a href='/tags/Raspberry-Pi/'>Raspberry Pi</a>
+  <a href='/tags/LED/'>LED</a>
   
   
 </section>
@@ -77,7 +77,7 @@
 
       
       <section class="post-updated">
-  Last updated on <time datetime="2017-12-13T05:07:21.000Z" itemprop="dateModified">
+  Last updated on <time datetime="2017-12-13T13:57:04.000Z" itemprop="dateModified">
       2017-12-13
   </time>
 </section>
@@ -106,6 +106,14 @@
 <li>5V2A ACアダプタ</li>
 <li>ジャンパワイヤ(オス〜メス) いっぱい</li>
 </ul>
+<h5 id="追記"><a href="#追記" class="headerlink" title="追記"></a>追記</h5><p>Raspberry Piの設定によっては、サンプルプログラムを動かした時に、サウンドボードのエラーが出る場合がありました。<br>このライブラリとRaspberry Pi内蔵のサウンドボードが共存できないらしい。</p>
+<p>サウンドボードをOFFにするには、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /boot/config.txt</span><br></pre></td></tr></table></figure>
+<p>でRaspberry Piのconfigを開いて、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#dtparam=audio=on // &lt;-元から書いてあるものをコメントアウト</span><br><span class="line">dtparam=audio=off // &lt;-この行を追加</span><br></pre></td></tr></table></figure>
+<p>して保存、再起動してください。</p>
+<p>これでデモが動くようになるはず。</p>
+<p>オーディオデバイスを使いたい場合は、別にUSBサウンドボードを使えば良いみたいです。</p>
 
     </section>
     <footer class="post-footer">
