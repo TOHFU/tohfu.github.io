@@ -10,7 +10,7 @@
   <meta name="MobileOptimized" content="320" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafruit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
-<meta name="keywords" content="Raspberry Pi,Adafruit,LED">
+<meta name="keywords" content="Adafruit,LED,Raspberry Pi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adafruit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
 <meta property="og:url" content="https://tohfu.github.io/2017/12/12/3/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafruit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
 <meta property="og:locale" content="ja">
 <meta property="og:image" content="https://tohfu.github.io/assets/img/ledmatrix_demo.jpg">
-<meta property="og:updated_time" content="2017-12-13T13:57:04.000Z">
+<meta property="og:updated_time" content="2017-12-13T13:58:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adafruit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
 <meta name="twitter:description" content="引き続き、LED Matrixの制御についてです。 最初は、Adafruit公式のtutorialを参考にしようと思ったのですが、tutorial内で使うライブラリがアップデートされていたので、ライブラリのReadmeを参考にしました。 1.Raspberry PiとLED Matrixの接続接続図を参考に。rpi-rgb-led-matrix/wiring.md at master · hzel">
@@ -62,11 +62,11 @@
   
   
   on 
-  <a href='/tags/Raspberry-Pi/'>Raspberry Pi</a>,
-  
   <a href='/tags/Adafruit/'>Adafruit</a>,
   
-  <a href='/tags/LED/'>LED</a>
+  <a href='/tags/LED/'>LED</a>,
+  
+  <a href='/tags/Raspberry-Pi/'>Raspberry Pi</a>
   
   
 </section>
@@ -77,7 +77,7 @@
 
       
       <section class="post-updated">
-  Last updated on <time datetime="2017-12-13T13:57:04.000Z" itemprop="dateModified">
+  Last updated on <time datetime="2017-12-13T13:58:27.000Z" itemprop="dateModified">
       2017-12-13
   </time>
 </section>
@@ -97,7 +97,7 @@
 <p>サンプルプログラムのoptionを確認</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./demo</span><br><span class="line">Expected required option -D &lt;demo&gt;</span><br><span class="line">usage: ./demo &lt;options&gt; -D &lt;demo-nr&gt; [optional parameter]</span><br><span class="line">Options:</span><br><span class="line">-D &lt;demo-nr&gt;              : Always needs to be set</span><br><span class="line">-L                        : Large display, in which each chain is &apos;folded down&apos;</span><br><span class="line">                           in the middle in an U-arrangement to get more vertical space.</span><br><span class="line">-R &lt;rotation&gt;             : Sets the rotation of matrix. Allowed: 0, 90, 180, 270. Default: 0.</span><br><span class="line">-t &lt;seconds&gt;              : Run for these number of seconds, then exit.</span><br><span class="line">--led-gpio-mapping=&lt;name&gt; : Name of GPIO mapping used. Default &quot;regular&quot;</span><br><span class="line">--led-rows=&lt;rows&gt;         : Panel rows. 8, 16, 32 or 64. (Default: 32).</span><br><span class="line">--led-chain=&lt;chained&gt;     : Number of daisy-chained panels. (Default: 1).</span><br><span class="line">--led-parallel=&lt;parallel&gt; : For A/B+ models or RPi2,3b: parallel chains. range=1..3 (Default: 1).</span><br><span class="line">--led-pwm-bits=&lt;1..11&gt;    : PWM bits (Default: 11).</span><br><span class="line">--led-brightness=&lt;percent&gt;: Brightness in percent (Default: 100).</span><br><span class="line">--led-scan-mode=&lt;0..1&gt;    : 0 = progressive; 1 = interlaced (Default: 0).</span><br><span class="line">--led-show-refresh        : Show refresh rate.</span><br><span class="line">--led-inverse             : Switch if your matrix has inverse colors on.</span><br><span class="line">--led-rgb-sequence        : Switch if your matrix has led colors swapped (Default: &quot;RGB&quot;)</span><br><span class="line">--led-pwm-lsb-nanoseconds : PWM Nanoseconds for LSB (Default: 130)</span><br><span class="line">--led-no-hardware-pulse   : Don&apos;t use hardware pin-pulse generation.</span><br><span class="line">--led-slowdown-gpio=&lt;0..2&gt;: Slowdown GPIO. Needed for faster Pis and/or slower panels (Default: 1).</span><br><span class="line">--led-daemon              : Make the process run in the background as daemon.</span><br><span class="line">--led-no-drop-privs       : Don&apos;t drop privileges from &apos;root&apos; after initializing the hardware.</span><br><span class="line">Demos, choosen with -D</span><br><span class="line">0  - some rotating square</span><br><span class="line">1  - forward scrolling an image (-m &lt;scroll-ms&gt;)</span><br><span class="line">2  - backward scrolling an image (-m &lt;scroll-ms&gt;)</span><br><span class="line">3  - test image: a square</span><br><span class="line">4  - Pulsing color</span><br><span class="line">5  - Grayscale Block</span><br><span class="line">6  - Abelian sandpile model (-m &lt;time-step-ms&gt;)</span><br><span class="line">7  - Conway&apos;s game of life (-m &lt;time-step-ms&gt;)</span><br><span class="line">8  - Langton&apos;s ant (-m &lt;time-step-ms&gt;)</span><br><span class="line">9  - Volume bars (-m &lt;time-step-ms&gt;)</span><br><span class="line">10 - Evolution of color (-m &lt;time-step-ms&gt;)</span><br><span class="line">11 - Brightness pulse generator</span><br><span class="line">Example:</span><br><span class="line">./demo -t 10 -D 1 runtext.ppm</span><br><span class="line">Scrolls the runtext for 10 seconds</span><br></pre></td></tr></table></figure>
 <p>32x16だと、<code>--led-rows=16</code>の指定が必要とのこと。<br>まずは0番(some rotating square)のサンプルプログラムを実行してみる。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./demo -D 0 --led-rows=16</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ./demo -D 0 --led-rows=16</span><br></pre></td></tr></table></figure>
 <p>動いたー。</p>
 <p><img src="/assets/img/ledmatrix_demo.jpg" alt="attention" title="led matrix demo"><br>(demo:0の写真じゃないけど)</p>
 <h5 id="使用した機材"><a href="#使用した機材" class="headerlink" title="使用した機材"></a>使用した機材</h5><ul>
@@ -108,7 +108,7 @@
 </ul>
 <h5 id="追記"><a href="#追記" class="headerlink" title="追記"></a>追記</h5><p>Raspberry Piの設定によっては、サンプルプログラムを動かした時に、サウンドボードのエラーが出る場合がありました。<br>このライブラリとRaspberry Pi内蔵のサウンドボードが共存できないらしい。</p>
 <p>サウンドボードをOFFにするには、</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /boot/config.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /boot/config.txt</span><br></pre></td></tr></table></figure>
 <p>でRaspberry Piのconfigを開いて、</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#dtparam=audio=on // &lt;-元から書いてあるものをコメントアウト</span><br><span class="line">dtparam=audio=off // &lt;-この行を追加</span><br></pre></td></tr></table></figure>
 <p>して保存、再起動してください。</p>
