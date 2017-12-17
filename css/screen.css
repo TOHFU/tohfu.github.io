@@ -2353,17 +2353,17 @@ pre .chunk {
     color: #333;
     transform: skew(-12deg) scale(1.0);
   }
+  50% {
+    color: #fff;
+    transform: skew(0deg);
+  }
   98% {
     color: #fff;
-    transform: skew(-6deg);
+    transform: skew(-6deg) scale(1.0);
   }
   99% {
     color: #333;
-    transform: skew(10deg) scale(1.0);
-  }
-  50% {
-    color: #fff;
-    transform: skew(0deg) scale(3.0);
+    transform: skew(10deg) scale(3.0);
   }
   100% {
     color: #fff;
