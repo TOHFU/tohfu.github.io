@@ -979,7 +979,7 @@ margin on the iframe, cause it breaks stuff. */
     right: 0;
     height: 70px;
     border: none;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%);
 }
 .no-cover .main-nav.overlay,
 .no-cover .back-button,
@@ -1017,7 +1017,7 @@ margin on the iframe, cause it breaks stuff. */
     letter-spacing: 1px;
     font-weight: normal;
     font-family: "Merriweather", serif;
-    color: #fff;
+    color: #333;
 }
 
 .page-description {
@@ -1104,6 +1104,9 @@ body:not(.post-template) .post-title {
 
 .post-title a {
     text-decoration: none;
+    animation-name: colorsheme;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
 }
 
 .post-excerpt p {
@@ -2258,6 +2261,24 @@ pre .chunk {
 /* ==========================================================================
    12. Animations
    ========================================================================== */
+
+@keyframes colorsheme {
+  0%   {color: #053765;}
+  20%  {color: #53bfd8;}
+  40%  {color: #747474;}
+  60%  {color: #ffe74c;}
+  80%  {color: #ff5964;}
+  100%   {color: #053765;}
+}
+
+@-webkit-keyframes colorsheme {
+  0%   {color: #053765;}
+  20%  {color: #53bfd8;}
+  40%  {color: #747474;}
+  60%  {color: #ffe74c;}
+  80%  {color: #ff5964;}
+  100%   {color: #053765;}
+}
 
 /* Used to fade in title/desc on the home page */
 @-webkit-keyframes fade-in-down {
