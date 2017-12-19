@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>node.jsでAdafruit 32x16 RGB LED Matrixを制御する | log</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="前回のpostで、LED Matrixのサンプルを動かせました。引き続き、発光パターンの制御をするために、node.jsを使って制御してみます。 node.jsで使用するためのライブラリとして、node-rpi-rgb-led-matrixが公開されているので、これを使ってみます。 0.node.jsのインストールこれは解説がたくさんあるので割愛します。個人的にはnodebrew派なので、この記事">
+<meta name="keywords" content="Adafruit,LED,Raspberry Pi,node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node.jsでAdafruit 32x16 RGB LED Matrixを制御する">
+<meta property="og:url" content="https://tohfu.github.io/2017/12/18/4/index.html">
+<meta property="og:site_name" content="log">
+<meta property="og:description" content="前回のpostで、LED Matrixのサンプルを動かせました。引き続き、発光パターンの制御をするために、node.jsを使って制御してみます。 node.jsで使用するためのライブラリとして、node-rpi-rgb-led-matrixが公開されているので、これを使ってみます。 0.node.jsのインストールこれは解説がたくさんあるので割愛します。個人的にはnodebrew派なので、この記事">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2017-12-19T12:58:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node.jsでAdafruit 32x16 RGB LED Matrixを制御する">
+<meta name="twitter:description" content="前回のpostで、LED Matrixのサンプルを動かせました。引き続き、発光パターンの制御をするために、node.jsを使って制御してみます。 node.jsで使用するためのライブラリとして、node-rpi-rgb-led-matrixが公開されているので、これを使ってみます。 0.node.jsのインストールこれは解説がたくさんあるので割愛します。個人的にはnodebrew派なので、この記事">
+  <!-- build:css css/screen.css -->
+
+  <link rel="stylesheet" href="/css/screen.css">
+  
+  <!-- endbuild -->
+  
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <meta name="generator" content="log">
+  
+  
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="main-header post-head no-cover" >
+    <nav class="main-nav  clearfix">
+        <!--  -->
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        
+    </nav>
+    
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  
+
+<main id="content" class="content" role="main">
+  <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name">node.jsでAdafruit 32x16 RGB LED Matrixを制御する</h1>
+      <section class="post-meta">
+  <time datetime="2017-12-18T13:09:11.000Z" itemprop="datePublished" class="post-date">
+      2017-12-18
+  </time>
+  
+  
+  on 
+  <a href='/tags/Adafruit/'>Adafruit</a>,
+  
+  <a href='/tags/LED/'>LED</a>,
+  
+  <a href='/tags/Raspberry-Pi/'>Raspberry Pi</a>,
+  
+  <a href='/tags/node-js/'>node.js</a>
+  
+  
+</section>
+
+    </header>
+    <section class="post-content" itemprop="description articleBody">
+      
+
+      
+      <section class="post-updated">
+  Last updated on <time datetime="2017-12-19T12:58:19.000Z" itemprop="dateModified">
+      2017-12-19
+  </time>
+</section>
+
+      
+      <p>前回のpostで、LED Matrixのサンプルを動かせました。<br>引き続き、発光パターンの制御をするために、node.jsを使って制御してみます。</p>
+<p>node.jsで使用するためのライブラリとして、<a href="https://www.npmjs.com/package/node-rpi-rgb-led-matrix" target="_blank" rel="noopener">node-rpi-rgb-led-matrix</a>が公開されているので、これを使ってみます。</p>
+<h3 id="0-node-jsのインストール"><a href="#0-node-jsのインストール" class="headerlink" title="0.node.jsのインストール"></a>0.node.jsのインストール</h3><p>これは解説がたくさんあるので割愛します。<br>個人的にはnodebrew派なので、この記事を参考にさせて頂いています。<br>後述しますが、sudo権限でnodeが使えるようにしておいてください。</p>
+<p><a href="http://sakanaaas.hateblo.jp/entry/2016/09/18/233251" target="_blank" rel="noopener">Raspberry PiにNode.js実行環境を構築 - ブログを書くまでが</a></p>
+<h3 id="1-プロジェクトの作成"><a href="#1-プロジェクトの作成" class="headerlink" title="1.プロジェクトの作成"></a>1.プロジェクトの作成</h3><p>適当にプロジェクトディレクトリを作って、npmを初期化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir node-ledmatrix</span><br><span class="line">$ cd node-ledmatrix</span><br><span class="line">$ npm init</span><br></pre></td></tr></table></figure>
+<p>npmの初期化に色々聞かれますが、とりあえず適当でOKです。</p>
+<h3 id="2-ライブラリのインストール"><a href="#2-ライブラリのインストール" class="headerlink" title="2.ライブラリのインストール"></a>2.ライブラリのインストール</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i node-rpi-rgb-led-matrix --save</span><br></pre></td></tr></table></figure>
+<p>あー、色々warningでるな。とりあえず、無視で。</p>
+<h3 id="3-サンプルを動かしてみる"><a href="#3-サンプルを動かしてみる" class="headerlink" title="3.サンプルを動かしてみる"></a>3.サンプルを動かしてみる</h3><p>index.jsを作成して、サンプルコードを入れてみます。エディタは何でも。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nano test.js</span><br></pre></td></tr></table></figure>
+<p>で、下記のサンプルコード(npmのreadmeそのまま転記)を入力して、保存します。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> LedMatrix = <span class="built_in">require</span>(<span class="string">"node-rpi-rgb-led-matrix"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> matrix = <span class="keyword">new</span> LedMatrix(<span class="number">16</span>);</span><br><span class="line">matrix.fill(<span class="number">255</span>, <span class="number">50</span>, <span class="number">100</span>);</span><br><span class="line">matrix.setPixel(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">255</span>);</span><br></pre></td></tr></table></figure>
+<p>できたら実行してみる。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo node test.js</span><br></pre></td></tr></table></figure>
+<p>一瞬ピンクに光って、{x: 0, y: 0}のピクセルが青く光りました。よかった。<br>リフレッシュレートとか決められるのかな。</p>
+<p>ちなみにここで、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node test.js</span><br></pre></td></tr></table></figure>
+<p>とやると、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">can&apos;t open /dev/mem: : Permission denied</span><br><span class="line">node: ../src/ledmatrix.cc:21: LedMatrix::LedMatrix(int, int, int): Assertion `io.Init()&apos; failed.</span><br></pre></td></tr></table></figure>
+<p>のエラーが出ます。<code>/dev/mem</code>のアクセス権限エラーですね。<br>githubのissueで議論されていました。対処する必要がある方は参考にしてみてください。</p>
+<p><a href="https://github.com/zeitungen/node-rpi-rgb-led-matrix/issues/12" target="_blank" rel="noopener">How do you run this as sudo? · Issue #12 · zeitungen/node-rpi-rgb-led-matrix</a></p>
+<p>今日はここまで。</p>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>tohfu</h4>
+    <p>web engineer / vj / media art</p>
+    
+      <section>
+        
+          <a href="https://twitter.com/mitamamma" class="author-social">twitter</a>
+        
+          <a href="https://github.com/TOHFU" class="author-social">github</a>
+        
+      </section>
+    </div>
+</section>
+
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=https://tohfu.github.io/2017/12/18/4/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://tohfu.github.io/2017/12/18/4/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://tohfu.github.io/2017/12/18/4/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+  
+  <span class="page-number">•</span>
+  
+  <a class="older-posts" href="/2017/12/12/3/" title="Adafruit 32x16 RGB LED MatrixをRaspberry Piで動かしてみる">
+      Older Post →
+  </a>
+  
+</nav>
+
+  
+</div>
+
+</main>
+
+
+  <footer class="site-footer clearfix">
+ <section class="copyright"><a href="/">log</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript">
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+</body>
+</html>
