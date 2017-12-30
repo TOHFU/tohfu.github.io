@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Google Homeを喋らせてみる | log</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="最近Google Homeが流行っているので、少し乗ってみました。 Google HomeのActionsは、dialogflowで作るのが基本なのですが、今回は、Google Homeに直接音声を流して、喋っているように見せるパターンです。 基本的にGoogle Homeは、何か命令をしたら動作する、というフローで使うものなので、室温が高い時に、「エアコンを消したらどうですか？」とか、帰ってきた">
+<meta name="keywords" content="node.js,Google Home,TTS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Homeを喋らせてみる">
+<meta property="og:url" content="https://tohfu.github.io/2017/12/30/6/index.html">
+<meta property="og:site_name" content="log">
+<meta property="og:description" content="最近Google Homeが流行っているので、少し乗ってみました。 Google HomeのActionsは、dialogflowで作るのが基本なのですが、今回は、Google Homeに直接音声を流して、喋っているように見せるパターンです。 基本的にGoogle Homeは、何か命令をしたら動作する、というフローで使うものなので、室温が高い時に、「エアコンを消したらどうですか？」とか、帰ってきた">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2017-12-30T13:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Homeを喋らせてみる">
+<meta name="twitter:description" content="最近Google Homeが流行っているので、少し乗ってみました。 Google HomeのActionsは、dialogflowで作るのが基本なのですが、今回は、Google Homeに直接音声を流して、喋っているように見せるパターンです。 基本的にGoogle Homeは、何か命令をしたら動作する、というフローで使うものなので、室温が高い時に、「エアコンを消したらどうですか？」とか、帰ってきた">
+  <!-- build:css css/screen.css -->
+
+  <link rel="stylesheet" href="/css/screen.css">
+  
+  <!-- endbuild -->
+  
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <meta name="generator" content="log">
+  
+  
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="main-header post-head no-cover" >
+    <nav class="main-nav  clearfix">
+        <!--  -->
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        
+    </nav>
+    
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  
+
+<main id="content" class="content" role="main">
+  <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name">Google Homeを喋らせてみる</h1>
+      <section class="post-meta">
+  <time datetime="2017-12-30T12:38:26.000Z" itemprop="datePublished" class="post-date">
+      2017-12-30
+  </time>
+  
+  
+  on 
+  <a href='/tags/node-js/'>node.js</a>,
+  
+  <a href='/tags/Google-Home/'>Google Home</a>,
+  
+  <a href='/tags/TTS/'>TTS</a>
+  
+  
+</section>
+
+    </header>
+    <section class="post-content" itemprop="description articleBody">
+      
+
+      
+      <p>最近Google Homeが流行っているので、少し乗ってみました。</p>
+<p>Google HomeのActionsは、dialogflowで作るのが基本なのですが、<br>今回は、Google Homeに直接音声を流して、喋っているように見せるパターンです。</p>
+<p>基本的にGoogle Homeは、何か命令をしたら動作する、というフローで使うものなので、<br>室温が高い時に、「エアコンを消したらどうですか？」とか、帰ってきた時に、「お帰りなさい」とか言ってもらうようなものを作る場合は、この方法を取るのが良いのかな、と思います。</p>
+<p>早速ですが、かなり便利なものがパッケージとして、npmに公開されています。</p>
+<p><a href="https://www.npmjs.com/package/google-home-notifier" target="_blank" rel="noopener">google-home-notifier</a></p>
+<p>例にならって、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir test-google-home-notifier</span><br><span class="line">cd test-google-home-notifier</span><br><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install google-home-notifier --save</span><br></pre></td></tr></table></figure>
+<p>でインストール。</p>
+<p><a href="https://github.com/noelportugal/google-home-notifier" target="_blank" rel="noopener">readme</a>に書いてあった、<br>Modify the following file “node_modules/mdns/lib/browser.js” …</p>
+<p>を一応対応しておく。</p>
+<p>で、早速動かしてみる。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> googlehome = <span class="built_in">require</span>(<span class="string">'google-home-notifier'</span>)</span><br><span class="line"><span class="keyword">var</span> lang = <span class="string">'ja'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 'Google-Home-xxx'に、Google Homeの名前を入れる</span></span><br><span class="line"><span class="comment">// 一度runさせると、ローカル上でGoogle Homeの候補をリストアップしてくれる</span></span><br><span class="line">googlehome.device(<span class="string">'Google-Home-xxx'</span>, lang);</span><br><span class="line"></span><br><span class="line"><span class="comment">// テキスト指定した文章の読み上げ</span></span><br><span class="line">googlehome.notify(<span class="string">'こんにちは'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// web上のmp3を再生</span></span><br><span class="line"><span class="comment">// 'http://pass-to/mp3-file.mp3'に、mp3ファイルのパスを指定。</span></span><br><span class="line">googlehome.play(<span class="string">'http://pass-to/mp3-file.mp3'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>tohfu</h4>
+    <p>web engineer / vj / media art</p>
+    
+      <section>
+        
+          <a href="https://twitter.com/mitamamma" class="author-social">twitter</a>
+        
+          <a href="https://github.com/TOHFU" class="author-social">github</a>
+        
+      </section>
+    </div>
+</section>
+
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=https://tohfu.github.io/2017/12/30/6/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://tohfu.github.io/2017/12/30/6/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://tohfu.github.io/2017/12/30/6/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+  
+  <span class="page-number">•</span>
+  
+  <a class="older-posts" href="/2017/12/20/5/" title="node.jsでAdafruit 32x16 RGB LED Matrixを制御する (2)">
+      Older Post →
+  </a>
+  
+</nav>
+
+  
+</div>
+
+</main>
+
+
+  <footer class="site-footer clearfix">
+ <section class="copyright"><a href="/">log</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript">
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+</body>
+</html>
