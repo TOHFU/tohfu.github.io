@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>sublime textの履歴を削除する | log</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="メインエディタにsublime textを使っています。cmd+dのマルチ選択とか、grep機能がすごくしっくりくるので、当分やめられないです。 ですが、一括置換を9000ファイル近くに行った時の問題。sublime textって、一括置換した時にファイルをタブで開いてくれるんですが、さすがにこのファイル数になるとハングアップしちゃいました。 しかも、前回開いていたファイルの変更履歴(未保存の分)">
+<meta name="keywords" content="sublime text,tips">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sublime textの履歴を削除する">
+<meta property="og:url" content="https://tohfu.github.io/2018/02/08/8/index.html">
+<meta property="og:site_name" content="log">
+<meta property="og:description" content="メインエディタにsublime textを使っています。cmd+dのマルチ選択とか、grep機能がすごくしっくりくるので、当分やめられないです。 ですが、一括置換を9000ファイル近くに行った時の問題。sublime textって、一括置換した時にファイルをタブで開いてくれるんですが、さすがにこのファイル数になるとハングアップしちゃいました。 しかも、前回開いていたファイルの変更履歴(未保存の分)">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2018-02-08T10:32:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sublime textの履歴を削除する">
+<meta name="twitter:description" content="メインエディタにsublime textを使っています。cmd+dのマルチ選択とか、grep機能がすごくしっくりくるので、当分やめられないです。 ですが、一括置換を9000ファイル近くに行った時の問題。sublime textって、一括置換した時にファイルをタブで開いてくれるんですが、さすがにこのファイル数になるとハングアップしちゃいました。 しかも、前回開いていたファイルの変更履歴(未保存の分)">
+  <link rel="icon" type="image/png" href="https://tohfu.github.io/assets/favicon.ico" />
+  <!-- build:css css/screen.css -->
+  <link rel="stylesheet" href="/css/screen.css">
+  
+  <!-- endbuild -->
+  
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <meta name="generator" content="log">
+  
+  
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="main-header post-head no-cover" >
+    <nav class="main-nav  clearfix">
+        <!--  -->
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        
+    </nav>
+    
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  
+
+<main id="content" class="content" role="main">
+  <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name">sublime textの履歴を削除する</h1>
+      <section class="post-meta">
+  <time datetime="2018-02-08T10:24:40.000Z" itemprop="datePublished" class="post-date">
+      2018-02-08
+  </time>
+  
+  
+  on 
+  <a href='/tags/sublime-text/'>sublime text</a>,
+  
+  <a href='/tags/tips/'>tips</a>
+  
+  
+</section>
+
+    </header>
+    <section class="post-content" itemprop="description articleBody">
+      
+
+      
+      <p>メインエディタにsublime textを使っています。<br><code>cmd+d</code>のマルチ選択とか、grep機能がすごくしっくりくるので、当分やめられないです。</p>
+<p>ですが、一括置換を9000ファイル近くに行った時の問題。<br>sublime textって、一括置換した時にファイルをタブで開いてくれるんですが、さすがにこのファイル数になるとハングアップしちゃいました。</p>
+<p>しかも、前回開いていたファイルの変更履歴(未保存の分)をしっかり保存してくれるおかげで、一回ハングアップしたら何度起動しても落ちるようになってしまいました。。</p>
+<p>頑張れsublime text。</p>
+<p>そんな時は、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Users/hogehoge/Library/Application Support/Sublime Text 3/Local/Auto Save Session.sublime_session</span><br></pre></td></tr></table></figure></p>
+<p>に、前回起動時の履歴が保存されているので、これを削除しましょう。</p>
+<p>なんとか解決。</p>
+
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>tohfu</h4>
+    <p>web engineer / vj / media art</p>
+    
+      <section>
+        
+          <a href="https://twitter.com/mitamamma" class="author-social">twitter</a>
+        
+          <a href="https://github.com/TOHFU" class="author-social">github</a>
+        
+      </section>
+    </div>
+</section>
+
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=https://tohfu.github.io/2018/02/08/8/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://tohfu.github.io/2018/02/08/8/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=https://tohfu.github.io/2018/02/08/8/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+  
+  <span class="page-number">•</span>
+  
+  <a class="older-posts" href="/2018/01/12/7/" title="node.jsでAdafruit 32x16 RGB LED Matrixを制御する (3)：画像の表示">
+      Older Post →
+  </a>
+  
+</nav>
+
+  
+</div>
+
+</main>
+
+
+  <footer class="site-footer clearfix">
+ <section class="copyright"><a href="/">log</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript">
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+</body>
+</html>
