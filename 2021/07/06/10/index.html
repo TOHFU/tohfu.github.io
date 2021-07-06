@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="log">
 <meta property="og:description" content="アクセシビリティ対応としてのフォーカス制御について。 モーダル画面が表示されている時のバックグラウンドや、スライダーで非表示(カレントではない)の要素に対するフォーカス制御について考え中。 答えは出てないですが、調べたメモ(ほぼリンク集です) フォーカスを受け取る経路についての解説フォーカスってそもそもなんだろう。いつ発生するのだろう。という理解がしやすかった。フォーカスの分類 | アクセシビリテ">
 <meta property="og:locale" content="ja">
-<meta property="og:updated_time" content="2021-07-06T14:09:14.647Z">
+<meta property="og:updated_time" content="2021-07-06T14:11:32.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webアクセシビリティとしてのフォーカス制御について考える">
 <meta name="twitter:description" content="アクセシビリティ対応としてのフォーカス制御について。 モーダル画面が表示されている時のバックグラウンドや、スライダーで非表示(カレントではない)の要素に対するフォーカス制御について考え中。 答えは出てないですが、調べたメモ(ほぼリンク集です) フォーカスを受け取る経路についての解説フォーカスってそもそもなんだろう。いつ発生するのだろう。という理解がしやすかった。フォーカスの分類 | アクセシビリテ">
@@ -94,12 +94,14 @@
 <h3 id="フォーカス管理に関する指針"><a href="#フォーカス管理に関する指針" class="headerlink" title="フォーカス管理に関する指針"></a>フォーカス管理に関する指針</h3><p>フォーカスに関連するa11y対応について段階的にまとめています。<br>後述するinert属性についても触れられている。<br><a href="https://standard.shiftbrain.com/blog/unavailable-inert-regions-and-inert-attribute" target="_blank" rel="noopener">UIにおける見えるけど利用できない非活性な領域の実装とinert属性について - シフトブレイン／スタンダードデザインユニット</a></p>
 <h3 id="inert属性"><a href="#inert属性" class="headerlink" title="inert属性"></a>inert属性</h3><p>tabindex属性で達成できず、ひたすら頭を悩ませるキッカケになった、子要素の「タブナビゲーション」に対して解決する手段。<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert" target="_blank" rel="noopener">HTMLElement.inert - Web APIs | MDN</a></p>
 <blockquote>
-<p>フォーカスイベントや支援技術からのイベントなど、要素のユーザー入力イベントをブラウザに「無視」させるプロパティです。ブラウザは、要素内のページ検索とテキスト選択を無視する場合もあります。<br>ということで、今回求めている要件にジャストフィット。<br>なんですが、各ブラウザ見事に非対応。つらい。<br><a href="https://caniuse.com/?search=inert" target="_blank" rel="noopener">“inert” | Can I use… Support tables for HTML5, CSS3, etc</a></p>
+<p>フォーカスイベントや支援技術からのイベントなど、要素のユーザー入力イベントをブラウザに「無視」させるプロパティです。ブラウザは、要素内のページ検索とテキスト選択を無視する場合もあります。</p>
 </blockquote>
+<p>ということで、今回求めている要件にジャストフィット。<br>なんですが、各ブラウザ見事に非対応。つらい。<br><a href="https://caniuse.com/?search=inert" target="_blank" rel="noopener">“inert” | Can I use… Support tables for HTML5, CSS3, etc</a></p>
 <p>Living Standardでも</p>
 <blockquote>
-<p>この節は、”inert”という名前のいかなるコンテンツ属性を定義または作成しない。<br>って言い切っているので、仕様化は止まっているよう。<br><a href="https://momdo.github.io/html/interaction.html#inert-subtrees" target="_blank" rel="noopener">HTML Standard 日本語訳</a></p>
+<p>この節は、”inert”という名前のいかなるコンテンツ属性を定義または作成しない。</p>
 </blockquote>
+<p>って言い切っているので、仕様化は止まっているよう。<br><a href="https://momdo.github.io/html/interaction.html#inert-subtrees" target="_blank" rel="noopener">HTML Standard 日本語訳</a></p>
 <p>polyfillはいくつかありそう。</p>
 <p>WICGのpolyfillがあるが、IE11対応する場合は芋づるで別のpolyfillが必要そう。<br><a href="https://github.com/WICG/inert" target="_blank" rel="noopener">GitHub - WICG/inert: Polyfill for the inert attribute and property.</a></p>
 <p>chromeも出している。<br>READMEの末尾でWICGとの比較についてコメントされてますね。こっちの方が現実的かも。<br><a href="https://github.com/GoogleChrome/inert-polyfill" target="_blank" rel="noopener">GitHub - GoogleChrome/inert-polyfill: Polyfill for the HTML inert attribute</a></p>
